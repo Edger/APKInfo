@@ -1,11 +1,13 @@
 # APK-Info
-APK-Info is a Windows tool to get detailed info about an apk file.
+APK-Info is a Windows tool to get detailed info about an apk file. This version mainly adjusted the UI displaying in Chinese, and simplified some functions compared to the original version.
 
 The app was originally created by ZoSTeR and posted on [Total Commander Forum](http://www.ghisler.ch/board/viewtopic.php?t=32908)
 
 Then was updated by jazzruby and this is the [original jazzruby thread on XDA](https://forum.xda-developers.com/showthread.php?t=2359373)
 
 Then was updated by bovirus and this is the [reworked thread on XDA](https://forum.xda-developers.com/showthread.php?t=3614970)
+
+Then was updated by Enyby and this is the [reworked thread on GitHub](https://github.com/Enyby/APK-Info)
 
 ![APK-Info](https://github.com/Enyby/APK-Info/blob/master/screenshot.png?raw=true "APK-Info")
 
