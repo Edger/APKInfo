@@ -17,26 +17,17 @@ Allows you to view:
 - name (in all languages),
 - version,
 - build number,
-- the minimum, maximum and target version of the SDK (Android),
+- the minimum, and target version of the SDK (Android),
 - supported density (DPI) and screen size,
 - architecture (ABI),
-- supported textures,
 - permissions,
 - features,
-- signature,
-- version of OpenGL ES,
-- support Android TV, Wear OS and Android Auto,
-- locales,
 - a variety of hashes (MD2, MD4, MD5, SHA1, SHA256, SHA384, SHA512)
 - and a lot of other information.
 
 The application is translated into 86 languages. The language is selected automatically based on the language of the operating system, but you can specify the language in the settings file.
 
-The app allows you to go to Google Play, a custom store and VirusTotal.
-
 You can rename an APK file using a pre-defined pattern with substitutions.
-
-You can also install or remove this APK file on a device or emulator connected via ADB.
 
 There is integration in the Windows shell.
 
