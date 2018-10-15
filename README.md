@@ -50,14 +50,14 @@ You can open the APK file in APK-Info using one of the following methods:
 - Open the APK file by double-clicking, after installing APK-Info, as a program for opening APK files (via explorer or attached .cmd file).
 
 # Download
-[Latest releases](https://github.com/Enyby/APK-Info/releases)
+[Latest releases](https://github.com/fox-hunt/APKInfo/releases)
 
 [Library of old APK-Info versions](https://mega.nz/#F!DNZxjaAb!2Xx8Y_CO6PYwGDnLRgS5_g)
 
 # How to build the latest version
 
-1. Download [the latest release](https://github.com/Enyby/APK-Info/releases/latest).
-2. Download [the source from github](https://github.com/Enyby/APK-Info/archive/master.zip).
+1. Download [the latest release](https://github.com/fox-hunt/APKInfo/releases).
+2. Download [the source from github](https://github.com/fox-hunt/APKInfo/archive/master.zip).
 3. Unpack the source on top of the release.
 4. Open the `Application-source\APK-Info.au3` file in the [SciTE4AutoIt3 editor](https://www.autoitscript.com/site/autoit-script-editor/downloads/).
 5. Press F7. The `Apk-Info.exe` file will be updated.
