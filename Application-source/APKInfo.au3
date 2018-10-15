@@ -237,7 +237,7 @@ $INFO_LBL = 0
 $INFO_BTN = 1
 
 $edits = 2
-Global $edtInfo[$edits][2]
+Global $edtInfo[$edits][1]
 
 $fullWidth = $rightColumnStart + $rightColumnWidth + 5
 $fullHeight = $offsetHeight + $fieldHeight * $fields + $bigFieldHeight * $edits
@@ -467,7 +467,7 @@ $bkgColor = 0
 _OpenNewFile($tmp_Filename, False)
 
 GUIRegisterMsg($WM_PAINT, "MY_WM_PAINT")
-GUIRegisterMsg($WM_GETMINMAXINFO, "MY_WM_GETMINMAXINFO")
+;~ GUIRegisterMsg($WM_GETMINMAXINFO, "MY_WM_GETMINMAXINFO")
 
 $minSize = WinGetPos($hGUI)
 
@@ -628,12 +628,12 @@ Func _SelAll()
 	If $class == 'Edit' Then _GUICtrlEdit_SetSel($hWnd, 0, -1)
 EndFunc   ;==>_SelAll
 
-Func _makeLangLabel($label)
-	If $ShowLangCode <> "1" Then Return
-	GUICtrlCreateLabel($label, $rightColumnStart, $offsetHeight + $labelTop, $rightColumnWidth, $inputHeight, $SS_CENTER)
-	GUICtrlSetResizing(-1, $GUI_DOCKWIDTH + $GUI_DOCKHEIGHT + $GUI_DOCKRIGHT + $GUI_DOCKTOP)
-	GUICtrlSetState(-1, $globalStyle)
-EndFunc   ;==>_makeLangLabel
+;~ Func _makeLangLabel($label)
+;~ 	If $ShowLangCode <> "1" Then Return
+;~ 	GUICtrlCreateLabel($label, $rightColumnStart, $offsetHeight + $labelTop, $rightColumnWidth, $inputHeight, $SS_CENTER)
+;~ 	GUICtrlSetResizing(-1, $GUI_DOCKWIDTH + $GUI_DOCKHEIGHT + $GUI_DOCKRIGHT + $GUI_DOCKTOP)
+;~ 	GUICtrlSetState(-1, $globalStyle)
+;~ EndFunc   ;==>_makeLangLabel
 
 Func _makeButton($label, $icon)
 	;设置button的位置
@@ -684,7 +684,7 @@ Func _makeField($label, $edtNum = 0, $width = 0, $dock = $GUI_DOCKTOP, $btnTip =
 	Return $ret
 EndFunc   ;==>_makeField
 
-; Draw PNG image
+;~ Draw PNG image
 Func MY_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
 	_WinAPI_RedrawWindow($hGUI, 0, 0, $RDW_UPDATENOW)
 	$pos = ControlGetPos(GUICtrlGetHandle($lblIcon), "", 0)
@@ -718,38 +718,42 @@ EndFunc   ;==>MY_WM_PAINT
 	} MINMAXINFO;
 #ce
 
-Func MY_WM_GETMINMAXINFO($hWnd, $Msg, $wParam, $lParam)
-	$minmaxinfo = DllStructCreate("int;int;int;int;int;int;int;int;int;int", $lParam)
-	DllStructSetData($minmaxinfo, 7, $minSize[2]) ; min X
-	DllStructSetData($minmaxinfo, 8, $minSize[3]) ; min Y
-	Return 0
-EndFunc   ;==>MY_WM_GETMINMAXINFO
+;~ Func MY_WM_GETMINMAXINFO($hWnd, $Msg, $wParam, $lParam)
+;~ 	$minmaxinfo = DllStructCreate("int;int;int;int;int;int;int;int;int;int", $lParam)
+;~ 	DllStructSetData($minmaxinfo, 7, $minSize[2]) ; min X
+;~ 	DllStructSetData($minmaxinfo, 8, $minSize[3]) ; min Y
+;~ 	Return 0
+;~ EndFunc   ;==>MY_WM_GETMINMAXINFO
 
+;~ 动态调整界面
 Func _OnResize()
 	; move halfs
 	$full = ControlGetPos(GUICtrlGetHandle($inpPkg), "", 0)
 	$half = ($full[2] - 5) / 2
 	$halfStart = $inputStart + $half + 5
 
+	;~ 调整版本和版本号的显示
 	GUICtrlSetPos($inpVersion, Default, Default, $half, Default)
 	GUICtrlSetPos($inpBuild, $halfStart, Default, $half, Default)
 
+	;~ 调整最低SDK的显示
 	GUICtrlSetPos($inpMinSDKLabel, Default, Default, $labelWidth, Default)
 	GUICtrlSetPos($inpMinSDKNum, Default, Default, Default, Default)
 	GUICtrlSetPos($inpMinSDK, Default, Default, $half + $half - $localesWidth / 2 + $iconSize + ($rightColumnWidth - $iconSize), Default)
 	;~ GUICtrlSetPos($inpMaxSDK, $halfStart, Default, $half, Default)
 
+	;~ 调整最大SDK的显示
 	;~ GUICtrlSetPos($inpTargetSDK, Default, Default, $half, Default)
 	;~ GUICtrlSetPos($inpCompileSDK, $halfStart, Default, $half, Default)
 	GUICtrlSetPos($inpTargetSDKLabel, $labelStart, Default, $labelWidth, Default)
 	GUICtrlSetPos($inpTargetSDKNum, Default, Default, Default, Default)
 	GUICtrlSetPos($inpTargetSDK, Default, Default, $half + $half - $localesWidth / 2 + $iconSize + ($rightColumnWidth - $iconSize), Default)
 
-	$half *= $abiRatio
+	;~ $half *= $abiRatio
 	;~ GUICtrlSetPos($inpABIs, Default, Default, $half, Default)
 	;~ GUICtrlSetPos($lblSupport, $inputStart + $half + 5, Default, $full[2] - $half - 5 + 5 + $rightColumnWidth, Default)
 
-	; move edits
+	;~ move edits
 	$start = ControlGetPos(GUICtrlGetHandle($inpDensities), "", 0)
 	If $inpMD5 Then
 		$end = $inpMD5
@@ -786,6 +790,7 @@ Func _OnResize()
 	_saveGUIPos()
 EndFunc   ;==>_OnResize
 
+;~ 保存软件上次的窗口位置
 Func _saveGUIPos()
 	If $RestoreGUI == '0' Then Return
 	$pos = WinGetPos($hGUI)
@@ -796,6 +801,7 @@ Func _saveGUIPos()
 	IniWrite($IniUser, "State", "LastHeight", $pos[3])
 EndFunc   ;==>_saveGUIPos
 
+;~ 重命名APK
 Func _renameAPK($prmNewFilenameAPK)
 	$result = FileMove($dirAPK & "\" & $fileAPK, $dirAPK & "\" & $prmNewFilenameAPK)
 	; if result<> = error
@@ -948,6 +954,7 @@ EndFunc   ;==>_OpenNewFile
 ;	EndIf
 ;EndFunc   ;==>_OnShow
 
+;~ 将APK显示以文本显示
 Func _ReplacePlaceholders($pattern)
 	$out = $pattern
 	$p = '%label%'
@@ -963,18 +970,18 @@ Func _ReplacePlaceholders($pattern)
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_MinSDK)
 	$p = '%min_android%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, _translateSDKLevel($apk_MinSDK, False))
-	$p = '%max%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_MaxSDK)
-	$p = '%max_android%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, _translateSDKLevel($apk_MaxSDK, False))
+	;~ $p = '%max%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_MaxSDK)
+	;~ $p = '%max_android%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, _translateSDKLevel($apk_MaxSDK, False))
 	$p = '%target%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_TargetSDK)
 	$p = '%target_android%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, _translateSDKLevel($apk_TargetSDK, False))
-	$p = '%compile%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_CompileSDK)
-	$p = '%compile_android%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, _translateSDKLevel($apk_CompileSDK, False))
+	;~ $p = '%compile%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_CompileSDK)
+	;~ $p = '%compile_android%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, _translateSDKLevel($apk_CompileSDK, False))
 
 	$p = '%screens%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, StringReplace($apk_Screens, " ", ','))
@@ -984,10 +991,10 @@ Func _ReplacePlaceholders($pattern)
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, StringReplace($apk_ABIs, " ", ','))
 	$p = '%textures%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, StringReplace($apk_Textures, " ", ','))
-	$p = '%opengles%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, StringReplace($apk_OpenGLES, $strOpenGLES, ''))
-	$p = '%support%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_Support)
+	;~ $p = '%opengles%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, StringReplace($apk_OpenGLES, $strOpenGLES, ''))
+	;~ $p = '%support%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_Support)
 
 	$p = '%file_bytes%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, FileGetSize($dirAPK & "\" & $fileAPK))
@@ -1009,8 +1016,8 @@ Func _ReplacePlaceholders($pattern)
 	$p = '%features%'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $apk_Features)
 
-	$p = '%lang%'
-	If StringInStr($out, $p) Then $out = StringReplace($out, $p, $Language_code)
+	;~ $p = '%lang%'
+	;~ If StringInStr($out, $p) Then $out = StringReplace($out, $p, $Language_code)
 
 	$p = '\n'
 	If StringInStr($out, $p) Then $out = StringReplace($out, $p, @CRLF)
