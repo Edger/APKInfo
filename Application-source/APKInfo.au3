@@ -307,7 +307,7 @@ $inpLabel = _makeField($strLabel, 0, $inputWidth - $iconSize / 3 - ($rightColumn
 ;~ 显示版本号
 Local $buildWidth = 50
 ;~ GUI上创建一个输入框(Input)控件，显示应用名称
-;~ GUICtrlCreateInput ( "文本", 左侧, 顶部 [, 宽度 [, 高度 [, 样式 [, 扩展样式]]]] ) 
+;~ GUICtrlCreateInput ( "文本", 左侧, 顶部 [, 宽度 [, 高度 [, 样式 [, 扩展样式]]]] )
 $inpBuild = GUICtrlCreateInput('', $inputStart + $inputWidth - $halfWidth, $offsetHeight, $halfWidth - $iconSize / 3 - ($rightColumnWidth - $iconSize) / 2, $inputHeight, $inputFlags)
 GUICtrlSetResizing(-1, $GUI_DOCKHEIGHT + $GUI_DOCKWIDTH + $GUI_DOCKRIGHT + $GUI_DOCKTOP)
 GUICtrlSetState(-1, $globalInputStyle)
